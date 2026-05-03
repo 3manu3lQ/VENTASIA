@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Más con Menos — Agente WhatsApp para tu negocio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --naranja: #FF6B00;
+  --naranja-dark: #E05A00;
+  --naranja-light: #FFF4EC;
+  --negro: #0A0A0A;
+  --gris: #6B7280;
+  --gris-claro: #F8F7F5;
+  --blanco: #FFFFFF;
+  --verde: #16A34A;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--blanco);
+  color: var(--negro);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── TIPOGRAFÍA ── */
+h1, h2, h3, .display { font-family: 'Syne', sans-serif; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.2rem;
+  color: var(--negro);
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--naranja); }
+nav a {
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--gris); text-decoration: none;
+  transition: color .2s;
+}
+nav a:hover { color: var(--negro); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.btn-nav {
+  background: var(--naranja); color: var(--blanco) !important;
+  padding: 0.5rem 1.25rem; border-radius: 100px;
+  font-weight: 600 !important; font-size: 0.875rem !important;
+  transition: background .2s, transform .15s !important;
+}
+.btn-nav:hover { background: var(--naranja-dark) !important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 8rem 2rem 5rem;
+  background: var(--gris-claro);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,107,0,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 780px;
+  text-align: center;
+  position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blanco);
+  border: 1px solid rgba(255,107,0,0.2);
+  color: var(--naranja);
+  font-size: 0.8rem; font-weight: 600;
+  padding: 0.4rem 1rem; border-radius: 100px;
+  margin-bottom: 1.75rem;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--naranja);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 1.5rem;
+  color: var(--negro);
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--naranja);
+  position: relative;
+}
+.hero p.lead {
+  font-size: 1.15rem; color: var(--gris);
+  max-width: 560px; margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+.hero-ctas {
+  display: flex; gap: 1rem;
+  justify-content: center; flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--naranja); color: var(--blanco);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; font-size: 1rem;
+  padding: 0.9rem 2rem; border-radius: 100px;
+  text-decoration: none;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.3);
+}
+.btn-primary:hover {
+  background: var(--naranja-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255,107,0,0.4);
+}
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--negro);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; font-size: 1rem;
+  padding: 0.9rem 2rem; border-radius: 100px;
+  text-decoration: none; border: 1.5px solid rgba(0,0,0,0.15);
+  transition: border-color .2s, transform .15s;
+}
+.btn-secondary:hover { border-color: var(--negro); transform: translateY(-2px); }
+.hero-stats {
+  display: flex; justify-content: center; gap: 3rem;
+  margin-top: 4rem; flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem; font-weight: 800;
+  color: var(--negro); display: block;
+}
+.stat-label { font-size: 0.8rem; color: var(--gris); }
+
+/* ── SECCIÓN PROBLEMA ── */
+.problema {
+  padding: 6rem 2rem;
+  background: var(--negro);
+  color: var(--blanco);
+}
+.problema-inner {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.problema-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700; line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+.problema-text h2 span { color: var(--naranja); }
+.problema-text p { color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1rem; }
+.pain-list { display: flex; flex-direction: column; gap: 1rem; }
+.pain-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border-left: 3px solid var(--naranja);
+}
+.pain-icon { font-size: 1.2rem; min-width: 24px; }
+.pain-text { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+.pain-text strong { color: var(--blanco); display: block; margin-bottom: 2px; }
+
+/* ── SOLUCIÓN ── */
+.solucion {
+  padding: 6rem 2rem;
+  background: var(--blanco);
+}
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--naranja);
+  margin-bottom: 1rem;
+}
+.section-header h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700; letter-spacing: -1px;
+  line-height: 1.15; margin-bottom: 1rem;
+}
+.section-header p { color: var(--gris); max-width: 500px; margin: 0 auto; }
+
+.features-grid {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.feature-card {
+  padding: 1.75rem;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  background: var(--gris-claro);
+  transition: transform .2s, box-shadow .2s;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.feature-icon {
+  width: 48px; height: 48px;
+  background: var(--naranja-light);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; margin-bottom: 1rem;
+}
+.feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.feature-card p { font-size: 0.875rem; color: var(--gris); line-height: 1.6; }
+
+/* ── CONVERSACIÓN DEMO ── */
+.demo {
+  padding: 6rem 2rem;
+  background: var(--gris-claro);
+}
+.demo-inner {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.demo-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700; letter-spacing: -1px;
+  line-height: 1.2; margin-bottom: 1rem;
+}
+.demo-text h2 span { color: var(--naranja); }
+.demo-text p { color: var(--gris); line-height: 1.7; margin-bottom: 1.5rem; }
+.demo-benefits { display: flex; flex-direction: column; gap: 0.75rem; }
+.demo-benefit {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.9rem; font-weight: 500;
+}
+.demo-benefit::before {
+  content: '✓';
+  width: 22px; height: 22px; min-width: 22px;
+  background: var(--verde); color: white;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 0.7rem; font-weight: 700;
+}
+
+.chat-mockup {
+  background: #ECE5DD;
+  border-radius: 20px;
+  padding: 1.25rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.chat-header {
+  background: #075E54; color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 12px 12px 0 0;
+  display: flex; align-items: center; gap: 10px;
+  margin: -1.25rem -1.25rem 1rem;
+}
+.chat-avatar {
+  width: 36px; height: 36px;
+  background: var(--naranja); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.chat-info { flex: 1; }
+.chat-name { font-size: 0.9rem; font-weight: 600; }
+.chat-status { font-size: 0.7rem; opacity: 0.7; }
+.messages { display: flex; flex-direction: column; gap: 8px; }
+.msg {
+  max-width: 85%; padding: 0.6rem 0.875rem;
+  border-radius: 12px; font-size: 0.82rem; line-height: 1.5;
+  position: relative;
+}
+.msg.bot {
+  background: white; align-self: flex-start;
+  border-radius: 4px 12px 12px 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.msg.user {
+  background: #DCF8C6; align-self: flex-end;
+  border-radius: 12px 4px 12px 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.msg-time { font-size: 0.65rem; color: rgba(0,0,0,0.4); margin-top: 3px; text-align: right; }
+.msg.bot .msg-time { text-align: left; }
+
+/* ── PLANES ── */
+.planes {
+  padding: 6rem 2rem;
+  background: var(--blanco);
+}
+.planes-grid {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem; align-items: start;
+}
+.plan-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  background: var(--blanco);
+  position: relative;
+  transition: transform .2s;
+}
+.plan-card:hover { transform: translateY(-4px); }
+.plan-card.featured {
+  border: 2px solid var(--naranja);
+  background: var(--negro);
+  color: var(--blanco);
+}
+.plan-popular {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--naranja); color: white;
+  font-size: 0.72rem; font-weight: 700;
+  padding: 4px 16px; border-radius: 100px;
+  white-space: nowrap; letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.plan-tier {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--naranja); margin-bottom: 0.5rem;
+}
+.plan-card.featured .plan-tier { color: var(--naranja); }
+.plan-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem; font-weight: 800;
+  margin-bottom: 0.25rem; letter-spacing: -0.5px;
+}
+.plan-card.featured .plan-name { color: var(--blanco); }
+.plan-desc { font-size: 0.85rem; color: var(--gris); margin-bottom: 1.5rem; line-height: 1.5; }
+.plan-card.featured .plan-desc { color: rgba(255,255,255,0.55); }
+.plan-price-block { margin-bottom: 1.75rem; }
+.plan-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 3rem; font-weight: 800;
+  line-height: 1; letter-spacing: -2px;
+}
+.plan-card.featured .plan-price { color: var(--blanco); }
+.plan-price sup { font-size: 1.2rem; vertical-align: top; margin-top: 0.5rem; display: inline-block; }
+.plan-price span { font-size: 1rem; font-weight: 400; color: var(--gris); letter-spacing: 0; }
+.plan-card.featured .plan-price span { color: rgba(255,255,255,0.4); }
+.plan-features { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+.plan-feature {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 0.875rem; line-height: 1.4;
+}
+.plan-feature .chk {
+  width: 18px; height: 18px; min-width: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; margin-top: 1px;
+}
+.plan-feature .chk.yes { background: rgba(22,163,74,0.12); color: var(--verde); }
+.plan-card.featured .plan-feature .chk.yes { background: rgba(22,163,74,0.2); color: #4ADE80; }
+.plan-feature .chk.no { background: rgba(0,0,0,0.06); color: rgba(0,0,0,0.3); }
+.plan-card.featured .plan-feature .chk.no { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.2); }
+.feat-no { color: rgba(0,0,0,0.3); }
+.plan-card.featured .feat-no { color: rgba(255,255,255,0.25); }
+.btn-plan {
+  display: block; width: 100%;
+  padding: 0.875rem;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; font-size: 0.95rem;
+  text-align: center; text-decoration: none;
+  transition: all .2s;
+  cursor: pointer; border: none;
+}
+.btn-plan-outline {
+  background: transparent;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  color: var(--negro);
+}
+.btn-plan-outline:hover { border-color: var(--negro); }
+.btn-plan-featured {
+  background: var(--naranja);
+  color: white;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.35);
+}
+.btn-plan-featured:hover { background: var(--naranja-dark); transform: translateY(-1px); }
+
+/* ── FAQ ── */
+.faq { padding: 6rem 2rem; background: var(--gris-claro); }
+.faq-list {
+  max-width: 680px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 0;
+}
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 1.5rem 0;
+}
+.faq-q {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600; font-size: 1rem;
+  margin-bottom: 0.5rem; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.faq-q::after { content: '+'; font-size: 1.3rem; color: var(--naranja); }
+.faq-a { font-size: 0.9rem; color: var(--gris); line-height: 1.7; }
+
+/* ── CTA FINAL ── */
+.cta-final {
+  padding: 6rem 2rem;
+  background: var(--negro);
+  text-align: center;
+}
+.cta-final h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800; color: var(--blanco);
+  letter-spacing: -1.5px; margin-bottom: 1rem;
+  line-height: 1.1;
+}
+.cta-final h2 span { color: var(--naranja); }
+.cta-final p { color: rgba(255,255,255,0.5); margin-bottom: 2.5rem; font-size: 1rem; }
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #25D366; color: white;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; font-size: 1.1rem;
+  padding: 1rem 2.5rem; border-radius: 100px;
+  text-decoration: none;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+}
+.wa-btn:hover {
+  background: #20B858; transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.45);
+}
+.wa-icon { font-size: 1.3rem; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem;
+  background: var(--negro);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+footer span { color: var(--naranja); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .problema-inner, .demo-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { gap: 1.5rem; }
+  .plan-card.featured { margin-top: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">más con <span>menos</span></div>
+  <div class="nav-links">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#planes">Planes</a>
+    <a href="#faq">FAQ</a>
+    <a class="btn-nav" href="#contacto">Hablemos</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Agente WhatsApp con IA</div>
+    <h1>Tu negocio<br>vendiendo solo,<br><em>todo el día</em></h1>
+    <p class="lead">Automatizá la toma de pedidos por WhatsApp con inteligencia artificial. 100% personalizado para tu negocio — no es una plantilla, es tu asistente. Más ventas, cero esfuerzo.</p>
+    <div class="hero-ctas">
+      <a href="#contacto" class="btn-primary">
+        <span>Quiero mi agente</span>
+        <span>→</span>
+      </a>
+      <a href="#como-funciona" class="btn-secondary">Ver cómo funciona</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Atención automática</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5seg</span>
+        <span class="stat-label">Tiempo de respuesta</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">🚀</span>
+        <span class="stat-label">Implementación inmediata</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problema" id="problema">
+  <div class="problema-inner">
+    <div class="problema-text">
+      <h2>¿Cuánto tiempo perdés<br>atendiendo <span>WhatsApp</span>?</h2>
+      <p>Cada mensaje que respondés manualmente es tiempo que no estás produciendo, descansando, o haciendo crecer tu negocio.</p>
+      <p>El problema no es que tengas clientes. El problema es que tu sistema de atención no escala con vos.</p>
+    </div>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-icon">⏰</div>
+        <div class="pain-text">
+          <strong>Respondés a toda hora</strong>
+          Los clientes esperan respuesta inmediata — incluso a las 11 de la noche o el domingo.
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">😤</div>
+        <div class="pain-text">
+          <strong>Pedidos con errores</strong>
+          Confusión de cantidades, precios mal comunicados, pedidos que se pierden entre tantos chats.
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">💸</div>
+        <div class="pain-text">
+          <strong>Ventas que se escapan</strong>
+          Si tardás en responder, el cliente se va a otro lado. Simple.
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">📊</div>
+        <div class="pain-text">
+          <strong>Sin datos de tu negocio</strong>
+          No sabés qué vendiste esta semana, cuál es tu producto estrella ni qué clientes son recurrentes.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="solucion" id="como-funciona">
+  <div class="section-header">
+    <div class="section-tag">La solución</div>
+    <h2>Un empleado digital que<br>nunca descansa</h2>
+    <p>Tu agente de WhatsApp atiende, toma pedidos, calcula totales y notifica — sin que vos intervengas.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>Atiende 24/7</h3>
+      <p>Responde al instante a cualquier hora. Sábados, domingos, feriados — tu negocio nunca cierra para los pedidos.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3>Toma el pedido completo</h3>
+      <p>Pregunta producto por producto, confirma cantidades y calcula el total solo. Cero errores, cero confusión.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛵</div>
+      <h3>Coordina la entrega</h3>
+      <p>Pregunta si retira en el local o necesita envío. Si es envío, pide la dirección y la incluye en el resumen.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <h3>Te avisa al instante</h3>
+      <p>Cuando el pedido se confirma, recibís un resumen completo en tu WhatsApp personal. Sin mirar el chat del negocio.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🙋</div>
+      <h3>Vos mandás siempre</h3>
+      <p>Con un simple comando podés tomar el control en cualquier momento y atender vos. El bot se apaga y se reactiva cuando querés.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <h3>100% personalizado para tu negocio</h3>
+      <p>No es una plantilla genérica. El agente aprende tu nombre, tus productos, tu tono y tu horario. Tus clientes sienten que hablan con alguien de tu equipo.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>API oficial de Meta</h3>
+      <p>Usamos el mismo canal que usan las empresas más grandes del mundo. Sin apps de terceros, sin riesgos de bloqueo, con toda la estabilidad de la infraestructura de Meta.</p>
+    </div>
+      <h3>Aprende quién sos</h3>
+      <p>Reconoce a tus clientes recurrentes, los saluda diferente y puede recordar pedidos anteriores para agilizar la compra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO CONVERSACIÓN -->
+<section class="demo">
+  <div class="demo-inner">
+    <div class="demo-text">
+      <h2>Una conversación<br><span>que vende sola</span></h2>
+      <p>Así se ve el agente en acción. Natural, claro, eficiente. Tus clientes no van a sentir que hablan con un robot.</p>
+      <div class="demo-benefits">
+        <div class="demo-benefit">Responde en segundos, no en horas</div>
+        <div class="demo-benefit">No comete errores de precio</div>
+        <div class="demo-benefit">Nunca se cansa ni se olvida</div>
+        <div class="demo-benefit">Habla como vos querés que hable</div>
+      </div>
+    </div>
+    <div class="chat-mockup">
+      <div class="chat-header">
+        <div class="chat-avatar">🐔</div>
+        <div class="chat-info">
+          <div class="chat-name">Arwen Pollería</div>
+          <div class="chat-status">en línea</div>
+        </div>
+      </div>
+      <div class="messages">
+        <div class="msg user">Hola! quiero hacer un pedido<div class="msg-time">14:32 ✓✓</div></div>
+        <div class="msg bot">¡Hola! 👋 Bienvenido a Arwen Pollería 🐔<br>¿Qué querés pedir? Si querés ver todo el menú escribí <em>catálogo</em>.<div class="msg-time">14:32</div></div>
+        <div class="msg user">2 pollos enteros y medio pollo<div class="msg-time">14:33 ✓✓</div></div>
+        <div class="msg bot">✅ Anotado!<br>• 2x Pollo entero — $18.000<br>• 1x Medio pollo — $7.500<br><br>¿Algo más o eso sería todo?<div class="msg-time">14:33</div></div>
+        <div class="msg user">eso es todo<div class="msg-time">14:34 ✓✓</div></div>
+        <div class="msg bot">¿Retirás en el local o necesitás envío? 🏠<div class="msg-time">14:34</div></div>
+        <div class="msg user">envío a Av. Colón 1234<div class="msg-time">14:35 ✓✓</div></div>
+        <div class="msg bot">🎉 Pedido confirmado!<br><strong>Total: $25.500</strong><br>📋 N° POL-2506-A3B4<br>🛵 Envío a Av. Colón 1234<br><br>¡Gracias! En breve te contactamos.<div class="msg-time">14:35</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section class="planes" id="planes">
+  <div class="section-header">
+    <div class="section-tag">Planes y precios</div>
+    <h2>Elegí lo que<br>necesita tu negocio</h2>
+    <p>Sin permanencia. Podés cambiar de plan cuando quieras.</p>
+  </div>
+  <div class="planes-grid">
+
+    <!-- BÁSICO -->
+    <div class="plan-card">
+      <div class="plan-tier">Básico</div>
+      <div class="plan-name">Empezar</div>
+      <div class="plan-desc">Para negocios chicos que quieren automatizar sin complicaciones.</div>
+      <div class="plan-price-block">
+        <div class="plan-price"><sup>$</sup>45<span> USD/mes</span></div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature"><span class="chk yes">✓</span>Saludo automático personalizado</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Toma de pedido ítem por ítem</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Cálculo de total automático</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Retiro o envío con dirección</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Notificación al dueño</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Atención humana (bot on/off)</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Horario de atención configurable</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>200 conversaciones/mes</div>
+        <div class="plan-feature"><span class="chk no">✗</span><span class="feat-no">Catálogo visual de WhatsApp</span></div>
+        <div class="plan-feature"><span class="chk no">✗</span><span class="feat-no">Clientes recurrentes</span></div>
+        <div class="plan-feature"><span class="chk no">✗</span><span class="feat-no">Reportes semanales</span></div>
+      </div>
+      <a href="#contacto" class="btn-plan btn-plan-outline">Empezar con Básico</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="plan-card featured">
+      <div class="plan-popular">⭐ MÁS ELEGIDO</div>
+      <div class="plan-tier">Pro</div>
+      <div class="plan-name">Crecer</div>
+      <div class="plan-desc">El punto ideal entre precio y funcionalidad. Vende más con menos esfuerzo.</div>
+      <div class="plan-price-block">
+        <div class="plan-price"><sup>$</sup>65<span> USD/mes</span></div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature"><span class="chk yes">✓</span>Todo lo del plan Básico</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Catálogo visual de WhatsApp Business</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Reconoce clientes recurrentes</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Follow-up si no confirma el pedido</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Número de pedido único</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Reporte semanal automático</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>600 conversaciones/mes</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Precios desde planilla (sin pedirte nada)</div>
+        <div class="plan-feature"><span class="chk no">✗</span><span class="feat-no">Panel web en tiempo real</span></div>
+        <div class="plan-feature"><span class="chk no">✗</span><span class="feat-no">Google Sheets automático</span></div>
+        <div class="plan-feature"><span class="chk no">✗</span><span class="feat-no">Fidelización de clientes</span></div>
+      </div>
+      <a href="#contacto" class="btn-plan btn-plan-featured">Empezar con Pro</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="plan-card">
+      <div class="plan-tier">Premium</div>
+      <div class="plan-name">Escalar</div>
+      <div class="plan-desc">Para negocios grandes que quieren control total y datos en tiempo real.</div>
+      <div class="plan-price-block">
+        <div class="plan-price"><sup>$</sup>120<span> USD/mes</span></div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feature"><span class="chk yes">✓</span>Todo lo del plan Pro</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Panel web de pedidos en tiempo real</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Historial de pedidos por cliente</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Registro automático en Google Sheets</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Sistema de fidelización automático</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Mensajes de marketing programados</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>"Tu pedido está listo" al cliente</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Conversaciones ilimitadas</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Soporte prioritario</div>
+        <div class="plan-feature"><span class="chk yes">✓</span>Onboarding personalizado incluido</div>
+      </div>
+      <a href="#contacto" class="btn-plan btn-plan-outline">Empezar con Premium</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-header">
+    <div class="section-tag">Preguntas frecuentes</div>
+    <h2>Todo lo que querés saber</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">¿Necesito saber de tecnología?</div>
+      <div class="faq-a">Para nada. Nosotros configuramos todo. Vos solo nos das los datos del negocio (productos, precios, horarios) y en 24hs tu agente está funcionando.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Puedo cambiar los precios cuando quiero?</div>
+      <div class="faq-a">Sí, desde una planilla de Google Sheets súper sencilla. Cambiás el precio y el bot lo usa automáticamente desde ese momento. Sin llamarnos, sin esperar.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Qué pasa si quiero atender yo mismo?</div>
+      <div class="faq-a">Con un comando simple (/bot off) el agente se apaga y vos tomás el control. Cuando terminás, /bot on y vuelve a trabajar solo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Cuánto cuesta por mensaje o conversación?</div>
+      <div class="faq-a">Usamos la API oficial de WhatsApp Business de Meta — el mismo canal que usan las empresas más grandes del mundo. Esto garantiza estabilidad, seguridad y sin riesgo de bloqueos por uso de aplicaciones no autorizadas.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿El bot suena como un robot?</div>
+      <div class="faq-a">No. Lo configuramos con la personalidad de tu negocio — si sos una pollería cordobesa, habla como una pollería cordobesa. Los clientes casi nunca se dan cuenta.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">¿Puedo cancelar en cualquier momento?</div>
+      <div class="faq-a">Sí. Sin permanencias ni penalidades. Si en algún momento no querés seguir, avisás y listo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="contacto">
+  <h2>¿Listo para vender<br><span>mientras dormís?</span></h2>
+  <p>Escribinos ahora y en 24hs tu agente está funcionando.</p>
+  <a class="wa-btn" href="https://wa.me/5493576466283?text=Hola%20Emanuel!%20Vi%20tu%20página%20y%20quiero%20saber%20más%20sobre%20el%20agente%20de%20WhatsApp%20para%20mi%20negocio" target="_blank">
+    <span class="wa-icon">💬</span>
+    Hablemos por WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Más con Menos</span> · Agentes de WhatsApp con IA · Córdoba, Argentina</p>
+</footer>
+
+</body>
+</html>
